@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1 class="text-center text-xl">Connexion</h1>
+<br>
+{% if error %}
+    <div class="text-red-700 text-center">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+<br>
+    {{form_start(form)}}
+        {{ form_widget(form.email, {'attr': {'class': 'field', 'placeholder': "Email", "value": last_username}}) }}
+        {{ form_widget(form.password, {'attr': {'class': 'field', 'placeholder': "Mot de passe"}}) }}
+        <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}">
+        <button type="submit">Connexion</button>
+    {{form_end(form)}}
+{% endblock %}

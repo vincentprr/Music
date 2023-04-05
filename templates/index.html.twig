@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% if app.user %}
+    <a class="!inline button float-right" href="{{path('addAlbum')}}">Ajouter</a><br><br><br>
+    {% if app.user.favorites|length > 0 %}
+    <h1 class="text-2xl text-center mt-4">Mes favoris</h1>
+    <div class="flex flex-wrap justify-center gap-14 mt-6">
+        {% for album in app.user.favorites %}
+            <a class="block" href="{{path('album', {id: album.id})}}">
+                <img class="w-[250px] h-[250px] rounded-md" src="{{asset('fixtures/images/'~(album.image ?? 'unknown.jpg'))}}" alt="">
+                <h2 class="text-center font-bold">{{album.title}}</h2>
+                <p class="italic text-center">{{album.author.name}}</p>
+            </a>
+        {% endfor %}
+    </div>
+    <h1 class="text-2xl text-center mt-6">Les albums</h1>
+    <br><br>
+    {% endif %}
+{% endif %}
+
+<div class="flex flex-wrap justify-center gap-14">
+    {% for album in albums %}
+        <a class="block" href="{{path('album', {id: album.id})}}">
+            <img class="w-[250px] h-[250px] rounded-md" src="{{asset('fixtures/images/'~(album.image ?? 'unknown.jpg'))}}" alt="">
+            <h2 class="text-center font-bold">{{album.title}}</h2>
+            <p class="italic text-center">{{album.author.name}}</p>
+        </a>
+    {% endfor %}
+</div>
+{% endblock %}

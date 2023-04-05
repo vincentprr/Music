@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1 class="text-center text-xl">Inscription</h1>
+<br>
+{% if error %}
+<p class="text-red-600 text-center">{{error}}</p>
+{% endif %}
+<br>
+    {{form_start(form)}}
+        {{ form_widget(form.email, {'attr': {'class': 'field', 'placeholder': "Email"}}) }}
+        {{ form_widget(form.password, {'attr': {'class': 'field', 'placeholder': "Mot de passe"}}) }}
+        <button type="submit">S'inscrire</button>
+    {{form_end(form)}}
+{% endblock %}

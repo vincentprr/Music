@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1 class="text-center text-xl">{{(album ? "Modifier" : "Ajouter")}} un album</h1>
+<br>
+{% if error %}
+<p class="text-red-600 text-center">{{error}}</p>
+{% endif %}
+<br>
+    {{form_start(form)}}
+        {{ form_widget(form.image, {'attr': {'class': 'field', 'placeholder': "Nom de l'image", 'value': (album ? album.image : "")}}) }}
+        {{ form_widget(form.releaseYear, {'attr': {'class': 'field', 'placeholder': "Année", 'value': (album ? album.releaseYear : "")}}) }}
+        {{ form_widget(form.title, {'attr': {'class': 'field', 'placeholder': "Titre", 'value': (album ? album.title : "")}}) }}
+        <select id="author" class="field" name="author">
+            {% for artist in artists %}
+            <option {{ album and album.author.id != artist.id ?: "selected" }} value="{{artist.id}}">{{artist.name}}</option>
+            {% endfor %}
+        </select>
+        {% for genre in genres %}
+            <div class="text-center">
+                <input {{ album and genre not in album.genre ?: 'checked="true"' }} type="checkbox" id="{{genre.id}}" value="{{genre.id}}" name="genres[]">
+                <label for="{{genre.id}}">{{genre.name}}</label><br>
+            </div>
+        {% endfor %}
+        <button type="submit">{{(album ? "Modifier" : "Ajouter")}}</button>
+    {{form_end(form)}}
+{% endblock %}

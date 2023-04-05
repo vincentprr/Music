@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.field{
+    border: 1px solid black;
+    @apply rounded-md m-auto block w-72 pl-2;
+}
+
+* > .field:nth-child(n+2){
+    @apply mt-5;
+}
+
+.field_t{
+    @apply text-center;
+}
+
+button, .button{
+    border: 2px solid black;
+    @apply rounded-md m-auto block px-4 py-1 mt-8;
+}
+
+svg{
+    @apply inline stroke-yellow-500;
+}
+
+.fav{
+    @apply fill-yellow-400;
+}
